@@ -12,3 +12,13 @@ h1 {
 p {
     color: #666;
 }
+
+#compteur {
+    font-size: 2em;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: inline-block;
+    border-radius: 5px;
+}

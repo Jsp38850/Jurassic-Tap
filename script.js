@@ -1,5 +1,14 @@
-// Fichier JavaScript pour Jurrasic Tap
-console.log("Bienvenue dans Jurrasic Tap !");
+// Fichier JavaScript pour Jurassic Tap
+console.log("Bienvenue dans Jurassic Tap !");
+
+// Compteur simple
+let compteur = 0;
+const compteurElement = document.getElementById('compteur');
+
+compteurElement.addEventListener('click', () => {
+    compteur++;
+    compteurElement.textContent = compteur;
+});
 
 // Exemple de fonction
 function demarrerJeu() {
