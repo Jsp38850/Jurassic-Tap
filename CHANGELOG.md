@@ -5,6 +5,18 @@ Tous les changements notables apportés au projet Jurrasic Tap seront documenté
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-04-13
+
+### Ajouté
+
+- Intégration de Bootstrap 5 via CDN pour la responsivité et le styling
+- Restructuration de la mise en page avec des classes Bootstrap (container, row, col-md-4, text-center, btn, img-fluid)
+- Suppression des styles CSS conflictuels dans `style.css` pour laisser Bootstrap gérer la responsivité
+
+### Modifié
+
+- Mise à jour de la structure HTML pour être responsive sur tous les appareils
+
 ## [1.5.0] - 2026-04-13
 
 ### Ajouté

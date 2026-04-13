@@ -1,6 +1,34 @@
 // Fichier JavaScript pour Jurassic Tap
 console.log("Bienvenue dans Jurassic Tap !");
 
+// Gestion de la version
+const versionElement = document.getElementById('version');
+let currentVersion = '0.0.0';
+
+// Fonction pour charger la version depuis le fichier JSON
+async function loadVersion() {
+    try {
+        const response = await fetch('version.json?t=' + Date.now()); // Cache buster
+        const data = await response.json();
+        const newVersion = data.version;
+        
+        // Mettre à jour si la version a changé
+        if (newVersion !== currentVersion) {
+            currentVersion = newVersion;
+            versionElement.textContent = 'V.' + newVersion;
+            console.log('Version mise à jour: V.' + newVersion);
+        }
+    } catch (error) {
+        console.error('Erreur lors du chargement de la version:', error);
+    }
+}
+
+// Charger la version au démarrage
+loadVersion();
+
+// Vérifier les mises à jour toutes les 2 secondes
+setInterval(loadVersion, 2000);
+
 // Compteur simple
 let compteur = 0;
 const compteurElement = document.getElementById('compteur');

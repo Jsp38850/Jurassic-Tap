@@ -21,50 +21,47 @@ p {
     border: 1px solid #ccc;
     display: inline-block;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-.boutons {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.boutons button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-.boutons button:hover {
-    background-color: #45a049;
-}
-
-.images {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.images figure {
-    margin: 0 20px;
-    text-align: center;
-}
-
+/* Styles personnalisés pour les images */
 .images img {
-    width: 100px;
-    height: 100px;
     cursor: pointer;
-    margin: 10px;
     border: 2px solid #ccc;
     border-radius: 5px;
+    max-width: 150px;
+    height: auto;
+    
 }
 
 .images figcaption {
     font-size: 1.2em;
     color: #333;
     margin-top: 5px;
+}
+
+/* Styles du footer */
+footer.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+}
+
+.footer-content {
+    margin: 0;
+}
+
+.footer-content p {
+    color: #fff;
+    margin: 0;
+}
+
+body {
+    padding-bottom: 50px;
 }
