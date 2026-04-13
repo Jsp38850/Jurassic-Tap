@@ -5,6 +5,24 @@ Tous les changements notables apportés au projet Jurrasic Tap seront documenté
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-04-13
+
+### Ajouté
+
+- Ajout d'une balise favicon dans `index.html` pour personnaliser l'icône de l'onglet
+
+## [1.1.0] - 2026-04-13
+
+### Ajouté
+
+- Ajout d'un compteur cliquable dans `index.html` avec un élément `<div id="compteur">`
+- Implémentation de la logique du compteur dans `script.js` : incrémentation au clic sur le compteur
+- Ajout de styles pour le compteur dans `style.css` : curseur pointeur, padding, fond blanc, bordure et coins arrondis
+
+### Modifié
+
+- Suppression du bouton "Incrémenter" dans `index.html` pour rendre le compteur directement cliquable
+
 ## [1.0.0] - 2026-04-13
 
 ### Ajouté
