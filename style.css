@@ -5,6 +5,43 @@ body {
     background-color: #f0f0f0;
 }
 
+.auto-increment-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 120px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+    padding: 0 10px;
+    white-space: nowrap;
+}
+
+.auto-increment-btn:hover {
+    background-color: #0056b3;
+}
+
+.auto-increment-btn.active {
+    background-color: #28a745;
+}
+
+.auto-increment-btn.active:hover {
+    background-color: #218838;
+}
+
+/* Deuxième bouton - positionné à droite du premier */
+.auto-increment-btn:nth-of-type(2) {
+    left: 150px;
+}
+
 h1 {
     color: #333;
 }
@@ -17,18 +54,18 @@ p {
     font-size: 2em;
     cursor: pointer;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
     display: inline-block;
     border-radius: 5px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Styles personnalisés pour les images */
 .images img {
     cursor: pointer;
-    border: 2px solid #ccc;
-    border-radius: 5px;
+    margin-top: 50px;
     max-width: 150px;
     height: auto;
     
@@ -72,7 +109,7 @@ footer.footer {
     justify-content: center;
     padding: 20px;
     border-radius: 12px;
-    background: #333;
+    background: grey;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -85,10 +122,12 @@ footer.footer {
 }
 
 .easter-egg-image {
-    max-width: 400px;
+    max-width: 500px;
     width: 100%;
     height: auto;
 }
+
+
 
 body {
     padding-bottom: 50px;

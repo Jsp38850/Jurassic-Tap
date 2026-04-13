@@ -59,24 +59,80 @@ versionElement.addEventListener('click', () => {
 let compteur = 0;
 const compteurElement = document.getElementById('compteur');
 
+// Bouton auto-incrémentation
+const autoIncrementBtn = document.getElementById('autoIncrementBtn');
+let autoIncrementInterval = null;
+let isAutoIncrementing = false;
+
+
+
+// Fonction pour vérifier si le bouton doit être visible
+function updateAutoIncrementBtnVisibility() {
+    if (compteur >= 15 && !isAutoIncrementing) {
+        autoIncrementBtn.style.display = 'block';
+    } else if (!isAutoIncrementing) {
+        autoIncrementBtn.style.display = 'none';
+    }
+}
+
+// Fonction pour démarrer l'auto-incrémentation
+function startAutoIncrement() {
+    if (isAutoIncrementing) return;
+    
+    isAutoIncrementing = true;
+    autoIncrementBtn.classList.add('active');
+    autoIncrementBtn.style.display = 'block';
+    
+    autoIncrementInterval = setInterval(() => {
+        compteur++;
+        compteurElement.textContent = compteur;
+    }, 1000);
+}
+
+// Fonction pour arrêter l'auto-incrémentation
+function stopAutoIncrement() {
+    if (!isAutoIncrementing) return;
+    
+    isAutoIncrementing = false;
+    autoIncrementBtn.classList.remove('active');
+    clearInterval(autoIncrementInterval);
+    autoIncrementInterval = null;
+    updateAutoIncrementBtnVisibility();
+}
+
+// Gestionnaire d'événement pour le bouton auto-incrémentation
+autoIncrementBtn.addEventListener('click', () => {
+    if (compteur >= 15 && !isAutoIncrementing) {
+        compteur -= 15;
+        compteurElement.textContent = compteur;
+        startAutoIncrement();
+    }
+});
+
 // Images cliquables pour incrémenter
 const image1 = document.getElementById('image1');
 const image2 = document.getElementById('image2');
 const image3 = document.getElementById('image3');
 
 image1.addEventListener('click', () => {
-    compteur++;
+    compteur +=2;
     compteurElement.textContent = compteur;
+    updateAutoIncrementBtnVisibility();
+    updateProteinBtnVisibility();
 });
 
 image2.addEventListener('click', () => {
     compteur++;
     compteurElement.textContent = compteur;
+    updateAutoIncrementBtnVisibility();
+    updateProteinBtnVisibility();
 });
 
 image3.addEventListener('click', () => {
     compteur++;
     compteurElement.textContent = compteur;
+    updateAutoIncrementBtnVisibility();
+    updateProteinBtnVisibility();
 });
 
 // Boutons sauvegarde et chargement
@@ -112,6 +168,8 @@ fileInput.addEventListener('change', (event) => {
                 if (data.compteur !== undefined) {
                     compteur = data.compteur;
                     compteurElement.textContent = compteur;
+                    updateAutoIncrementBtnVisibility();
+                    updateProteinBtnVisibility();
                 } else {
                     alert('Fichier JSON invalide.');
                 }
