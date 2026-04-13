@@ -5,6 +5,15 @@ Tous les changements notables apportés au projet Jurrasic Tap seront documenté
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-04-13
+
+### Ajouté
+
+- Ajout de boutons "Sauvegarde" et "Chargement" dans `index.html`
+- Implémentation de la sauvegarde : téléchargement d'un fichier JSON avec le compteur actuel
+- Implémentation du chargement : sélection et lecture d'un fichier JSON pour restaurer le compteur
+- Ajout de styles pour les boutons dans `style.css`
+
 ## [1.4.0] - 2026-04-13
 
 ### Ajouté
