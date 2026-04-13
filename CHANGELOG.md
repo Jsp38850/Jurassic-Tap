@@ -5,6 +5,25 @@ Tous les changements notables apportés au projet Jurrasic Tap seront documenté
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-04-13
+
+### Ajouté
+
+- Ajout de légendes sous chaque image dans `index.html` en utilisant `<figure>` et `<figcaption>`
+- Mise à jour des styles dans `style.css` pour centrer les images et styliser les légendes
+
+## [1.3.0] - 2026-04-13
+
+### Ajouté
+
+- Ajout de 3 images cliquables dans `index.html` pour incrémenter le compteur
+- Implémentation des écouteurs d'événements sur les images dans `script.js`
+- Ajout de styles pour les images dans `style.css` : taille fixe, curseur pointeur, marges et bordures
+
+### Modifié
+
+- Suppression de l'incrémentation au clic sur le compteur lui-même ; désormais uniquement via les images
+
 ## [1.2.0] - 2026-04-13
 
 ### Ajouté
