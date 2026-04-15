@@ -1,8 +1,16 @@
-body {
-    font-family: Arial, sans-serif;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+body{
     margin: 0;
-    padding: 20px;
-    background-color: #f0f0f0;
+  background-image: url("images/background/n5rSk.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .auto-increment-btn {
@@ -127,8 +135,141 @@ footer.footer {
     height: auto;
 }
 
+.game {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 16 / 9;
+  margin: auto;
+}
+
+.montagne {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
 
-body {
-    padding-bottom: 50px;
+.map {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+width: 1003px;
+    height: 781px;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Zones cliquables */
+.zone {
+  position: absolute;
+  cursor: pointer;
+}
+
+/* Exemple position (à adapter à ton image) */
+.zone1 {
+      top: 22%;
+    left: 37%;
+    width: 12%;
+    height: 14.5%;
+}
+
+.zone2 {
+  top: 23%;
+    left: 54%;
+    width: 13%;
+    height: 13.5%;
+}
+
+.zone3 {
+  top: 39%;
+    left: 20%;
+    width: 14%;
+    height: 14.5%;
+}
+.zone4 {
+ top: 40%;
+    left: 55%;
+    width: 14%;
+    height: 14.5%;
+}
+.zone5 {
+  top: 59%;
+    left: 18%;
+    width: 19%;
+    height: 15.5%;
+}
+.zone6 {
+      top: 60%;
+    left: 57%;
+    width: 11%;
+    height: 12.5%;
+}
+.zone7 {
+top: 74%;
+    left: 69%;
+    width: 8%;
+    height: 13.5%;
+}
+/* DEBUG (optionnel pour voir les zones) */
+.zone {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+/* Objets cliquables */
+.item {
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+/* Position en % */
+.proteine {
+top: 47%;
+    left: 44%;
+    width: 4%;
+    
+}
+
+.glucide {
+  top: 46%;
+    left: 39%;
+    width: 4%;
+    
+}
+
+.lipide {
+  top: 45%;
+    left: 35%;
+    width: 3%;
+    
+}
+
+/* Effet hover */
+.item:hover {
+  transform: scale(1.2);
+}
+
+.dino {
+ position: absolute;
+    top: 38%;
+    left: 20%;
+    width: 10%;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 165, 0, 0.6));
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.item {
+  animation: float 2s infinite;
 }

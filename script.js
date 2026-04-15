@@ -1,5 +1,7 @@
-// Fichier JavaScript pour Jurassic Tap
-console.log("Bienvenue dans Jurassic Tap !");
+//Fonction pour naviguer vers une page (nouvelle zone)
+function goPage(page) {
+  window.location.href = page;
+}
 
 // Gestion de la version
 const versionElement = document.getElementById('version');

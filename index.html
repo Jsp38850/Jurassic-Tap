@@ -12,9 +12,11 @@
 <body>
     <button id="autoIncrementBtn" class="auto-increment-btn">Amelioration</button>
     <button id="TwoIncrement2" class="auto-increment-btn">Amelioration Protein</button>
-    <div class="container">
-        <h1 class="text-center">Jurassic Tap</h1>
-        <p class="text-center">Page de debut du Jeu</p>
+<!--<div class="container">
+
+        
+        <h1 class="text-left">Jurassic Tap</h1>
+
         <div id="compteur" class="text-center">0</div>
       
         <div class="images row">
@@ -43,8 +45,42 @@
             <button id="chargement" class="btn btn-primary">Chargement Sauvegarde</button>
             <input type="file" id="fileInput" accept=".json" style="display: none;">
         </div>
-    </div>
-    </div>
+    </div>-->
+
+    <div class="map">
+
+   <img src="images/montagnv2.png" class="montagne">
+
+  <!-- Protéine -->
+  <img src="images/bouton/Proteine.png" class="item proteine" onclick="collect('proteine')">
+
+  <!-- Glucide -->
+  <img src="images/bouton/Glucide.png" class="item glucide" onclick="collect('glucide')">
+
+  <!-- Lipide -->
+  <img src="images/bouton/Lipide.png" class="item lipide" onclick="collect('lipide')">
+
+  <img src="images/dino/dino1.png" class="dino">
+
+  <!-- Zone 1 -->
+  <div class="zone zone1" onclick="goPage('zone1.html')"></div>
+
+  <!-- Zone 2 -->
+  <div class="zone zone2" onclick="goPage('zone/laboratoire.html')"></div>
+  <!-- Zone 3 
+  <div class="zone zone3" onclick="goPage('zone3.html')"></div>-->
+  <!-- Zone 4 -->
+  <div class="zone zone4" onclick="goPage('zone4.html')"></div>
+  <!-- Zone 5 -->
+  <div class="zone zone5" onclick="goPage('zone5.html')"></div>
+  <!-- Zone 6 -->
+  <div class="zone zone6" onclick="goPage('zone6.html')"></div>
+  <!-- Zone 7 -->
+  <div class="zone zone7" onclick="goPage('zone7.html')"></div>
+
+</div>
+
+
     <footer class="footer">
         <div class="footer-content">
             <p id="version">V.0.0.0</p>
