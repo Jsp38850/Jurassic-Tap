@@ -1,138 +1,134 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
-body{
-    margin: 0;
+body {
+  margin: 0;
   background-image: url("images/background/n5rSk.jpg");
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 .auto-increment-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 120px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    display: none;
-    z-index: 1000;
-    transition: background-color 0.3s ease;
-    padding: 0 10px;
-    white-space: nowrap;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 120px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+  padding: 0 10px;
+  white-space: nowrap;
 }
 
 .auto-increment-btn:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .auto-increment-btn.active {
-    background-color: #28a745;
+  background-color: #28a745;
 }
 
 .auto-increment-btn.active:hover {
-    background-color: #218838;
+  background-color: #218838;
 }
 
 /* Deuxième bouton - positionné à droite du premier */
 .auto-increment-btn:nth-of-type(2) {
-    left: 150px;
+  left: 150px;
 }
 
 h1 {
-    color: #333;
+  color: #333;
 }
 
 p {
-    color: #666;
+  color: #666;
 }
 
 #compteur {
-    font-size: 2em;
-    cursor: pointer;
-    padding: 10px;
-    display: inline-block;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  font-size: 2em;
+  cursor: pointer;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Styles personnalisés pour les images */
-.images img {
-    cursor: pointer;
-    margin-top: 50px;
-    max-width: 150px;
-    height: auto;
-    
-}
-
-.images figcaption {
-    font-size: 1.2em;
-    color: #333;
-    margin-top: 5px;
+.title {
+  font-size: 3em;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 20px;
 }
 
 /* Styles du footer */
 footer.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    font-size: 0.9em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9em;
 }
 
 .footer-content {
-    margin: 0;
+  margin: 0;
 }
 
 .footer-content p {
-    color: #fff;
-    margin: 0;
+  color: #fff;
+  margin: 0;
 }
 
 .easter-egg-overlay {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-radius: 12px;
-    background: grey;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 1050;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 12px;
+  background: grey;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  z-index: 1050;
 }
 
 .easter-egg-overlay.show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .easter-egg-image {
-    max-width: 500px;
-    width: 100%;
-    height: auto;
+  max-width: 500px;
+  width: 100%;
+  height: auto;
 }
 
 .game {
@@ -150,14 +146,13 @@ footer.footer {
   display: block;
 }
 
-
 .map {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-width: 1003px;
-    height: 781px;
+  width: 1003px;
+  height: 781px;
 }
 
 .background {
@@ -174,48 +169,48 @@ width: 1003px;
 
 /* Exemple position (à adapter à ton image) */
 .zone1 {
-      top: 22%;
-    left: 37%;
-    width: 12%;
-    height: 14.5%;
+  top: 22%;
+  left: 37%;
+  width: 12%;
+  height: 14.5%;
 }
 
 .zone2 {
   top: 23%;
-    left: 54%;
-    width: 13%;
-    height: 13.5%;
+  left: 54%;
+  width: 13%;
+  height: 13.5%;
 }
 
 .zone3 {
   top: 39%;
-    left: 20%;
-    width: 14%;
-    height: 14.5%;
+  left: 20%;
+  width: 14%;
+  height: 14.5%;
 }
 .zone4 {
- top: 40%;
-    left: 55%;
-    width: 14%;
-    height: 14.5%;
+  top: 40%;
+  left: 55%;
+  width: 14%;
+  height: 14.5%;
 }
 .zone5 {
   top: 59%;
-    left: 18%;
-    width: 19%;
-    height: 15.5%;
+  left: 18%;
+  width: 19%;
+  height: 15.5%;
 }
 .zone6 {
-      top: 60%;
-    left: 57%;
-    width: 11%;
-    height: 12.5%;
+  top: 60%;
+  left: 57%;
+  width: 11%;
+  height: 12.5%;
 }
 .zone7 {
-top: 74%;
-    left: 69%;
-    width: 8%;
-    height: 13.5%;
+  top: 74%;
+  left: 69%;
+  width: 8%;
+  height: 13.5%;
 }
 /* DEBUG (optionnel pour voir les zones) */
 .zone {
@@ -231,24 +226,21 @@ top: 74%;
 
 /* Position en % */
 .proteine {
-top: 47%;
-    left: 44%;
-    width: 4%;
-    
+  top: 47%;
+  left: 44%;
+  width: 4%;
 }
 
 .glucide {
   top: 46%;
-    left: 39%;
-    width: 4%;
-    
+  left: 39%;
+  width: 4%;
 }
 
 .lipide {
   top: 45%;
-    left: 35%;
-    width: 3%;
-    
+  left: 35%;
+  width: 3%;
 }
 
 /* Effet hover */
@@ -257,17 +249,24 @@ top: 47%;
 }
 
 .dino {
- position: absolute;
-    top: 38%;
-    left: 20%;
-    width: 10%;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 165, 0, 0.6));
+  position: absolute;
+  top: 38%;
+  left: 20%;
+  width: 10%;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
+    drop-shadow(0 0 20px rgba(255, 165, 0, 0.6));
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .item {
