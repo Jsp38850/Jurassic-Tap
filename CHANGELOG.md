@@ -5,6 +5,18 @@ Tous les changements notables apportés au projet Jurrasic Tap seront documenté
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-04-15
+
+### Ajouté
+
+- Ajout d'un arrière-plan (background)
+- Premier essai d'implémentation de cartes (maps)
+- Ajout d'images pour les dinosaures et montagnes
+
+### Modifié
+
+- Mise à jour de `index.html`, `script.js` et `style.css` pour intégrer les nouvelles fonctionnalités
+
 ## [1.6.0] - 2026-04-13
 
 ### Ajouté
