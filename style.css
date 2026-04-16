@@ -186,9 +186,11 @@ footer.footer {
 .zone {
   position: absolute;
   cursor: pointer;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
-
-/* Exemple position (à adapter à ton image) */
 .zone1 {
   top: 22%;
   left: 37%;
@@ -232,10 +234,6 @@ footer.footer {
   left: 69%;
   width: 8%;
   height: 13.5%;
-}
-/* DEBUG (optionnel pour voir les zones) */
-.zone {
-  background: rgba(255, 0, 0, 0.2);
 }
 
 /* Objets cliquables */
@@ -292,4 +290,69 @@ footer.footer {
 
 .item {
   animation: float 2s infinite;
+}
+
+.zone-lock {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 45%;
+}
+
+/* Modal Zone 6 */
+.zone6-modal-content {
+  background-image: url("images/background/n5rSk.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.zone6-modal-body {
+  text-align: center;
+  padding: 2rem;
+}
+
+.upgrade-btn {
+  margin: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* motif de verrouillage (hachures) */
+.zone-lock::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 10px,
+    rgba(0, 0, 0, 0.05) 10px,
+    rgba(0, 0, 0, 0.05) 20px
+  );
+}
+
+/* cadenas au centre */
+.zone-lock::after {
+  content: "🔒";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  opacity: 0.8;
+}
+
+/* Texte sous le cadenas */
+.zone-text {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  z-index: 1;
 }

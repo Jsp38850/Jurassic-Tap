@@ -183,5 +183,51 @@ fileInput.addEventListener('change', (event) => {
     }
 });
 
+// Fonction pour afficher la modal de la zone 6
+function showZone6Modal() {
+    const modal = new bootstrap.Modal(document.getElementById('zone6Modal'));
+    modal.show();
+}
+
+// Fonction pour acheter une amélioration
+function buyUpgrade(type) {
+    let cost = 0;
+    switch (type) {
+        case 'autoIncrement':
+            cost = 15;
+            break;
+        case 'doubleIncrement':
+            cost = 15;
+            break;
+        case 'speedBoost':
+            cost = 50;
+            break;
+    }
+    if (compteur >= cost) {
+        compteur -= cost;
+        compteurElement.textContent = compteur;
+        // Appliquer l'amélioration
+        switch (type) {
+            case 'autoIncrement':
+                startAutoIncrement();
+                break;
+            case 'doubleIncrement':
+                // Supposons que c'est pour le bouton double
+                // Peut-être activer un mode double ou quelque chose
+                alert('Amélioration Double activée !');
+                break;
+            case 'speedBoost':
+                // Augmenter la vitesse d'auto-incrément
+                autoIncrementInterval = Math.max(500, autoIncrementInterval - 200);
+                clearInterval(autoIncrementTimer);
+                startAutoIncrement();
+                alert('Boost de vitesse activé !');
+                break;
+        }
+    } else {
+        alert('Pas assez de points !');
+    }
+}
+
 
 
