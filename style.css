@@ -186,10 +186,6 @@ footer.footer {
 .zone {
   position: absolute;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 .zone1 {
   top: 22%;
@@ -299,6 +295,7 @@ footer.footer {
   overflow: hidden;
   cursor: pointer;
   border-radius: 45%;
+  z-index: 2;
 }
 
 /* Modal Zone 6 */
@@ -319,6 +316,14 @@ footer.footer {
   font-size: 1.2rem;
 }
 
+/* Centrer le modal */
+#zone6Modal .modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
 /* motif de verrouillage (hachures) */
 .zone-lock::before {
   content: "";
@@ -331,6 +336,7 @@ footer.footer {
     rgba(0, 0, 0, 0.05) 10px,
     rgba(0, 0, 0, 0.05) 20px
   );
+  z-index: 1;
 }
 
 /* cadenas au centre */
@@ -342,6 +348,7 @@ footer.footer {
   transform: translate(-50%, -50%);
   font-size: 40px;
   opacity: 0.8;
+  z-index: 1;
 }
 
 /* Texte sous le cadenas */

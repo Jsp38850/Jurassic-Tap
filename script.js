@@ -3,6 +3,8 @@ function goPage(page) {
   window.location.href = page;
 }
 
+console.log('Script chargé');
+
 // Gestion de la version
 const versionElement = document.getElementById('version');
 let currentVersion = '0.0.0';
@@ -61,55 +63,10 @@ versionElement.addEventListener('click', () => {
 let compteur = 0;
 const compteurElement = document.getElementById('compteur');
 
-// Bouton auto-incrémentation
-const autoIncrementBtn = document.getElementById('autoIncrementBtn');
-let autoIncrementInterval = null;
-let isAutoIncrementing = false;
 
 
 
-// Fonction pour vérifier si le bouton doit être visible
-function updateAutoIncrementBtnVisibility() {
-    if (compteur >= 15 && !isAutoIncrementing) {
-        autoIncrementBtn.style.display = 'block';
-    } else if (!isAutoIncrementing) {
-        autoIncrementBtn.style.display = 'none';
-    }
-}
 
-// Fonction pour démarrer l'auto-incrémentation
-function startAutoIncrement() {
-    if (isAutoIncrementing) return;
-    
-    isAutoIncrementing = true;
-    autoIncrementBtn.classList.add('active');
-    autoIncrementBtn.style.display = 'block';
-    
-    autoIncrementInterval = setInterval(() => {
-        compteur++;
-        compteurElement.textContent = compteur;
-    }, 1000);
-}
-
-// Fonction pour arrêter l'auto-incrémentation
-function stopAutoIncrement() {
-    if (!isAutoIncrementing) return;
-    
-    isAutoIncrementing = false;
-    autoIncrementBtn.classList.remove('active');
-    clearInterval(autoIncrementInterval);
-    autoIncrementInterval = null;
-    updateAutoIncrementBtnVisibility();
-}
-
-// Gestionnaire d'événement pour le bouton auto-incrémentation
-autoIncrementBtn.addEventListener('click', () => {
-    if (compteur >= 15 && !isAutoIncrementing) {
-        compteur -= 15;
-        compteurElement.textContent = compteur;
-        startAutoIncrement();
-    }
-});
 
 // Images cliquables pour incrémenter
 const image1 = document.getElementById('image1');
@@ -117,24 +74,21 @@ const image2 = document.getElementById('image2');
 const image3 = document.getElementById('image3');
 
 image1.addEventListener('click', () => {
+    console.log('Clic sur glucide');
     compteur +=2;
     compteurElement.textContent = compteur;
-    updateAutoIncrementBtnVisibility();
-    
 });
 
 image2.addEventListener('click', () => {
+    console.log('Clic sur proteine');
     compteur++;
     compteurElement.textContent = compteur;
-    updateAutoIncrementBtnVisibility();
-   
 });
 
 image3.addEventListener('click', () => {
+    console.log('Clic sur lipide');
     compteur++;
     compteurElement.textContent = compteur;
-    updateAutoIncrementBtnVisibility();
-   
 });
 
 // Boutons sauvegarde et chargement
@@ -170,8 +124,7 @@ fileInput.addEventListener('change', (event) => {
                 if (data.compteur !== undefined) {
                     compteur = data.compteur;
                     compteurElement.textContent = compteur;
-                    updateAutoIncrementBtnVisibility();
-                    updateProteinBtnVisibility();
+                    
                 } else {
                     alert('Fichier JSON invalide.');
                 }
@@ -183,51 +136,31 @@ fileInput.addEventListener('change', (event) => {
     }
 });
 
-// Fonction pour afficher la modal de la zone 6
 function showZone6Modal() {
     const modal = new bootstrap.Modal(document.getElementById('zone6Modal'));
     modal.show();
 }
 
-// Fonction pour acheter une amélioration
-function buyUpgrade(type) {
-    let cost = 0;
-    switch (type) {
-        case 'autoIncrement':
-            cost = 15;
-            break;
-        case 'doubleIncrement':
-            cost = 15;
-            break;
-        case 'speedBoost':
-            cost = 50;
-            break;
-    }
-    if (compteur >= cost) {
-        compteur -= cost;
-        compteurElement.textContent = compteur;
-        // Appliquer l'amélioration
-        switch (type) {
-            case 'autoIncrement':
-                startAutoIncrement();
-                break;
-            case 'doubleIncrement':
-                // Supposons que c'est pour le bouton double
-                // Peut-être activer un mode double ou quelque chose
-                alert('Amélioration Double activée !');
-                break;
-            case 'speedBoost':
-                // Augmenter la vitesse d'auto-incrément
-                autoIncrementInterval = Math.max(500, autoIncrementInterval - 200);
-                clearInterval(autoIncrementTimer);
-                startAutoIncrement();
-                alert('Boost de vitesse activé !');
-                break;
+function handleZone6Click() {
+    const zone6 = document.getElementById('ZoneTraining');
+    if (zone6.classList.contains('zone-lock')) {
+        if (compteur >= 10) {
+            zone6.classList.remove('zone-lock');
+            zone6.classList.add('zone');
+            const textSpan = zone6.querySelector('.zone-text');
+            if (textSpan) textSpan.style.display = 'none';
+            compteur -= 10;
+            compteurElement.textContent = compteur;
+            console.log('Zone 6 déverrouillée !');
+        } else {
+            console.log('Pas assez de points pour déverrouiller la zone 6');
         }
     } else {
-        alert('Pas assez de points !');
+        // Zone déverrouillée, ouvrir le modal
+        showZone6Modal();
     }
 }
+
 
 
 

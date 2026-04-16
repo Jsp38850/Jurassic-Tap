@@ -10,7 +10,6 @@
     
 </head> 
 <body>
-    <button id="autoIncrementBtn" class="auto-increment-btn">Amelioration</button>
 <!--<div class="container">
           <div class="boutons text-center">
             <button id="sauvegarde" class="btn btn-success">Export Sauvegarde</button>
@@ -53,7 +52,7 @@
   <!-- Zone 5 -->
   <div class="zone-lock zone5"><span class="zone-text">test</span></div>
   <!-- Zone 6 -->
-  <div class="zone-lock zone6" onclick="showZone6Modal()"><span class="zone-text">10pts</span></div>
+   <div id="ZoneTraining" class="zone-lock zone6" onclick="handleZone6Click()"><span class="zone-text">10pts</span></div>
   <!-- Zone 7 -->
   <div class="zone-lock zone7"><span class="zone-text">test</span></div>
 
@@ -74,11 +73,11 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content zone6-modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="zone6ModalLabel">Zone 6 - Améliorations</h5>
+                    <h5 class="modal-title" id="zone6ModalLabel">Zone 6</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body zone6-modal-body">
-                    <button class="btn btn-primary upgrade-btn" onclick="buyUpgrade('autoIncrement')">Amélioration Auto-Incrément (15 pts)</button>
+                    <p>Zone 6 déverrouillée !</p>
                 </div>
             </div>
         </div>
