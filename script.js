@@ -120,21 +120,21 @@ image1.addEventListener('click', () => {
     compteur +=2;
     compteurElement.textContent = compteur;
     updateAutoIncrementBtnVisibility();
-    updateProteinBtnVisibility();
+    
 });
 
 image2.addEventListener('click', () => {
     compteur++;
     compteurElement.textContent = compteur;
     updateAutoIncrementBtnVisibility();
-    updateProteinBtnVisibility();
+   
 });
 
 image3.addEventListener('click', () => {
     compteur++;
     compteurElement.textContent = compteur;
     updateAutoIncrementBtnVisibility();
-    updateProteinBtnVisibility();
+   
 });
 
 // Boutons sauvegarde et chargement
@@ -183,9 +183,5 @@ fileInput.addEventListener('change', (event) => {
     }
 });
 
-// Exemple de fonction
-function demarrerJeu() {
-    alert("Le jeu commence !");
-}
 
-// Vous pouvez ajouter plus de code ici
+

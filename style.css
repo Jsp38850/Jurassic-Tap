@@ -17,7 +17,7 @@ body {
 
 .auto-increment-btn {
   position: fixed;
-  top: 20px;
+  top: 102px;
   left: 20px;
   width: 120px;
   height: 50px;
@@ -60,16 +60,38 @@ p {
   color: #666;
 }
 
+.map {
+  position: relative;
+  max-width: 100%;
+}
+
+.montagne {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 #compteur {
-  font-size: 2em;
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4em;
   cursor: pointer;
-  padding: 10px;
-  display: inline-block;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  display: flex;
+  padding: 12px 18px;
+  /* background: rgba(0, 0, 0, 0.65); */
+  color: #fff;
+  /* border-radius: 12px; */
+  /* border: 2px solid rgba(255, 255, 255, 0.75); */
+  /* box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35); */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
+  text-shadow:
+    2px 2px 3px rgba(255, 255, 255, 0.3),
+    -2px -2px 3px rgba(0, 0, 0, 0.8),
+    0 0 2px rgba(0, 0, 0, 0.6);
 }
 
 .title {
@@ -85,7 +107,6 @@ footer.footer {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #333;
   color: #fff;
   text-align: center;
   padding: 10px;
