@@ -41,20 +41,20 @@
   <img src="images/dino/dino1.png" class="dino">
 
   <!-- Zone 1 -->
-  <div class="zone-lock zone1"><span class="zone-text">test</span></div>
+  <div class="zone-lock zone1"><span class="zone-text">100pts</span></div>
 
   <!-- Zone 2 -->
-  <div class="zone-lock zone2"><span class="zone-text">test</span></div>
+  <div class="zone-lock zone2"><span class="zone-text">1000pts</span></div>
   <!-- Zone 3 
   <div class="zone zone3"></div>-->
   <!-- Zone 4 -->
-  <div class="zone-lock zone4"><span class="zone-text">test</span></div>
+  <div class="zone-lock zone4"><span class="zone-text">10000pts</span></div>
   <!-- Zone 5 -->
-  <div class="zone-lock zone5"><span class="zone-text">test</span></div>
+  <div class="zone-lock zone5"><span class="zone-text">100000pts</span></div>
   <!-- Zone 6 -->
    <div id="ZoneTraining" class="zone-lock zone6" onclick="handleZone6Click()"><span class="zone-text">10pts</span></div>
   <!-- Zone 7 -->
-  <div class="zone-lock zone7"><span class="zone-text">test</span></div>
+  <div class="zone-lock zone7"><span class="zone-text">1000000pts</span></div>
 
 </div>
 
@@ -78,6 +78,13 @@
                 </div>
                 <div class="modal-body zone6-modal-body">
                     <p>Zone 6 déverrouillée !</p>
+                    <div class="mt-4">
+                        <h6>Améliorations</h6>
+                        <button id="autoIncrementBtn" class="btn btn-primary" onclick="buyAutoIncrement()">
+                            Amélioration Auto-Increment - Coût: 150 clics
+                        </button>
+                        <p id="autoIncrementStatus" class="mt-2" style="display: none; color: rgb(255, 230, 0);">✓ Amélioration achetée - +1 clic par seconde</p>
+                    </div>
                 </div>
             </div>
         </div>

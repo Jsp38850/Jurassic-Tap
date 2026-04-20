@@ -5,6 +5,17 @@ Tous les changements notables apportés au projet Jurrasic Tap seront documenté
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-04-16
+
+### Supprimé
+
+- Suppression complète du bouton d'amélioration auto-incrémentation et de tout code associé (fonctions, événements, modal d'améliorations).
+
+### Modifié
+
+- Correction des compteurs des images cliquables (glucide, protéine, lipide) pour qu'ils incrémentent correctement le compteur.
+- Restauration du modal de la zone 6 sans boutons d'amélioration, affichant simplement un message de déverrouillage.
+
 ## [1.7.0] - 2026-04-15
 
 ### Ajouté

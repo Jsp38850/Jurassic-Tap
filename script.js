@@ -63,6 +63,10 @@ versionElement.addEventListener('click', () => {
 let compteur = 0;
 const compteurElement = document.getElementById('compteur');
 
+// Variable pour tracker l'amélioration auto-increment
+let autoIncrementBought = false;
+let autoIncrementInterval = null;
+
 
 
 
@@ -159,6 +163,41 @@ function handleZone6Click() {
         // Zone déverrouillée, ouvrir le modal
         showZone6Modal();
     }
+}
+
+// Fonction pour acheter l'amélioration auto-increment
+function buyAutoIncrement() {
+    if (autoIncrementBought) {
+        alert('Amélioration déjà achetée !');
+        return;
+    }
+
+    if (compteur >= 150) {
+        // Déduire 150 du compteur
+        compteur -= 150;
+        compteurElement.textContent = compteur;
+        autoIncrementBought = true;
+
+        // Mettre à jour l'interface
+        document.getElementById('autoIncrementBtn').style.display = 'none';
+        document.getElementById('autoIncrementStatus').style.display = 'block';
+
+        // Lancer l'auto-increment
+        startAutoIncrement();
+        console.log('Amélioration auto-increment achetée !');
+    } else {
+        
+    }
+}
+
+// Fonction pour lancer l'auto-increment
+function startAutoIncrement() {
+    if (autoIncrementInterval) clearInterval(autoIncrementInterval);
+    
+    autoIncrementInterval = setInterval(() => {
+        compteur += 1;
+        compteurElement.textContent = compteur;
+    }, 1000); // 1000ms = 1 seconde
 }
 
 
