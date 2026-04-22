@@ -3,6 +3,12 @@ function goPage(page) {
   window.location.href = page;
 }
 
+// Fonction pour ouvrir le modal des paramètres
+function openSettingsModal() {
+  const settingsModal = new bootstrap.Modal(document.getElementById('settingsModal'));
+  settingsModal.show();
+}
+
 console.log('Script chargé');
 
 // Gestion de la version
@@ -63,9 +69,28 @@ versionElement.addEventListener('click', () => {
 let compteur = 0;
 const compteurElement = document.getElementById('compteur');
 
+// Compteurs individuels pour chaque nutriment
+let proteineCounter = 0;
+let glucideCounter = 0;
+let lipideCounter = 0;
+const proteineCounterElement = document.getElementById('proteine-counter');
+const glucideCounterElement = document.getElementById('glucide-counter');
+const lipideCounterElement = document.getElementById('lipide-counter');
+
 // Variable pour tracker l'amélioration auto-increment
 let autoIncrementBought = false;
 let autoIncrementInterval = null;
+
+// État des zones déverrouillées
+let zonesUnlocked = {
+  zone1: false,
+  zone2: false,
+  zone3: false,
+  zone4: false,
+  zone5: false,
+  zone6: false,
+  zone7: false
+};
 
 
 
@@ -79,20 +104,26 @@ const image3 = document.getElementById('image3');
 
 image1.addEventListener('click', () => {
     console.log('Clic sur glucide');
-    compteur +=2;
+    compteur += 2;
+    glucideCounter++;
     compteurElement.textContent = compteur;
+    glucideCounterElement.textContent = glucideCounter;
 });
 
 image2.addEventListener('click', () => {
     console.log('Clic sur proteine');
     compteur++;
+    proteineCounter++;
     compteurElement.textContent = compteur;
+    proteineCounterElement.textContent = proteineCounter;
 });
 
 image3.addEventListener('click', () => {
     console.log('Clic sur lipide');
     compteur++;
+    lipideCounter++;
     compteurElement.textContent = compteur;
+    lipideCounterElement.textContent = lipideCounter;
 });
 
 // Boutons sauvegarde et chargement
@@ -101,7 +132,14 @@ const chargementBtn = document.getElementById('chargement');
 const fileInput = document.getElementById('fileInput');
 
 sauvegardeBtn.addEventListener('click', () => {
-    const data = { compteur: compteur };
+    const data = {
+        compteur: compteur,
+        proteineCounter: proteineCounter,
+        glucideCounter: glucideCounter,
+        lipideCounter: lipideCounter,
+        autoIncrementBought: autoIncrementBought,
+        zonesUnlocked: zonesUnlocked
+    };
     const json = JSON.stringify(data, null, 2);
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -111,7 +149,7 @@ sauvegardeBtn.addEventListener('click', () => {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    URL.revokeURL(url);
 });
 
 chargementBtn.addEventListener('click', () => {
@@ -126,9 +164,41 @@ fileInput.addEventListener('change', (event) => {
             try {
                 const data = JSON.parse(e.target.result);
                 if (data.compteur !== undefined) {
+                    // Restaurer le compteur principal
                     compteur = data.compteur;
                     compteurElement.textContent = compteur;
                     
+                    // Restaurer les compteurs individuels
+                    if (data.proteineCounter !== undefined) {
+                        proteineCounter = data.proteineCounter;
+                        proteineCounterElement.textContent = proteineCounter;
+                    }
+                    if (data.glucideCounter !== undefined) {
+                        glucideCounter = data.glucideCounter;
+                        glucideCounterElement.textContent = glucideCounter;
+                    }
+                    if (data.lipideCounter !== undefined) {
+                        lipideCounter = data.lipideCounter;
+                        lipideCounterElement.textContent = lipideCounter;
+                    }
+                    
+                    // Restaurer l'amélioration auto-increment
+                    if (data.autoIncrementBought !== undefined) {
+                        autoIncrementBought = data.autoIncrementBought;
+                        if (autoIncrementBought) {
+                            document.getElementById('autoIncrementBtn').style.display = 'none';
+                            document.getElementById('autoIncrementStatus').style.display = 'block';
+                            startAutoIncrement();
+                        }
+                    }
+                    
+                    // Restaurer les zones déverrouillées
+                    if (data.zonesUnlocked !== undefined) {
+                        zonesUnlocked = data.zonesUnlocked;
+                        restoreZonesState();
+                    }
+                    
+                    console.log('Sauvegarde chargée avec succès !');
                 } else {
                     alert('Fichier JSON invalide.');
                 }
@@ -139,6 +209,29 @@ fileInput.addEventListener('change', (event) => {
         reader.readAsText(file);
     }
 });
+
+// Fonction pour restaurer l'état des zones
+function restoreZonesState() {
+    const zoneElements = {
+        zone1: document.querySelector('.zone1'),
+        zone2: document.querySelector('.zone2'),
+        zone3: document.querySelector('.zone3'),
+        zone4: document.querySelector('.zone4'),
+        zone5: document.querySelector('.zone5'),
+        zone6: document.getElementById('ZoneTraining'),
+        zone7: document.querySelector('.zone7')
+    };
+    
+    for (const [zoneName, isUnlocked] of Object.entries(zonesUnlocked)) {
+        const zoneElement = zoneElements[zoneName];
+        if (zoneElement && isUnlocked) {
+            zoneElement.classList.remove('zone-lock');
+            zoneElement.classList.add('zone');
+            const textSpan = zoneElement.querySelector('.zone-text');
+            if (textSpan) textSpan.style.display = 'none';
+        }
+    }
+}
 
 function showZone6Modal() {
     const modal = new bootstrap.Modal(document.getElementById('zone6Modal'));
@@ -155,6 +248,7 @@ function handleZone6Click() {
             if (textSpan) textSpan.style.display = 'none';
             compteur -= 10;
             compteurElement.textContent = compteur;
+            zonesUnlocked.zone6 = true;
             console.log('Zone 6 déverrouillée !');
         } else {
             console.log('Pas assez de points pour déverrouiller la zone 6');

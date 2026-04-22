@@ -10,16 +10,29 @@
     
 </head> 
 <body>
-<!--<div class="container">
-          <div class="boutons text-center">
-            <button id="sauvegarde" class="btn btn-success">Export Sauvegarde</button>
-            <button id="chargement" class="btn btn-primary">Chargement Sauvegarde</button>
-            <input type="file" id="fileInput" accept=".json" style="display: none;">
-        </div>
-    </div>-->
+
     <div>
-<h1 class="title">Jurassic Tap</h1>
+        <h1 class="title">Jurassic Tap</h1>
+        <div class="counters-container">
+            <div class="counter-item">
+                <img src="images/Bouton/Proteine.png" alt="Protéine" class="counter-icon">
+                <span id="proteine-counter" class="counter-value">0</span>
+            </div>
+            <div class="counter-item">
+                <img src="images/Bouton/Glucide.png" alt="Glucide" class="counter-icon">
+                <span id="glucide-counter" class="counter-value">0</span>
+            </div>
+            <div class="counter-item">
+                <img src="images/Bouton/Lipide.png" alt="Lipide" class="counter-icon">
+                <span id="lipide-counter" class="counter-value">0</span>
+            </div>
+        </div>
     </div>
+
+    <!-- Bouton engrenage pour les paramètres -->
+    <button class="settings-btn" id="settingsBtn" onclick="openSettingsModal()">
+        ⚙️
+    </button>
 
     <div class="map">
 
@@ -66,6 +79,31 @@
     </footer>
     <div class="easter-egg-overlay" id="easterEggOverlay">
         <img src="images/easter_egg/easter egg.png" alt="Easter Egg" class="easter-egg-image">
+    </div>
+
+    <!-- Modal Paramètres -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content settings-modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settingsModalLabel">Paramètres</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body settings-modal-body">
+                    <div class="d-grid gap-3">
+
+                        
+                        <button id="sauvegarde" class="btn btn-success btn-lg">
+                            📥 Export Sauvegarde
+                        </button>
+                        <button id="chargement" class="btn btn-primary btn-lg">
+                            📂 Chargement Sauvegarde
+                        </button>
+                        <input type="file" id="fileInput" accept=".json" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Modal Zone 6 -->
