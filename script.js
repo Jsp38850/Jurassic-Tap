@@ -92,6 +92,37 @@ let zonesUnlocked = {
   zone7: false
 };
 
+// Jauge de progression
+let gaugeLevel = 1;
+let gaugeCounter = 0;
+let gaugeMax = 100;
+const gaugeLevelElement = document.getElementById('gauge-level');
+const gaugeCounterElement = document.getElementById('gauge-counter');
+const gaugeFillElement = document.getElementById('gauge-fill');
+const gaugeProgressElement = document.getElementById('gauge-progress');
+
+// Fonction pour mettre à jour l'affichage de la jauge
+function updateGauge() {
+    const percentage = (gaugeCounter / gaugeMax) * 100;
+    gaugeFillElement.style.width = percentage + '%';
+    gaugeProgressElement.textContent = gaugeCounter + ' / ' + gaugeMax;
+    gaugeLevelElement.textContent = '+' + (gaugeLevel - 1);
+}
+
+// Fonction pour incrémenter la jauge
+function incrementGauge() {
+    gaugeCounter++;
+    if (gaugeCounter >= gaugeMax) {
+        // La jauge est pleine, on réinitialise et on augmente le niveau
+        gaugeCounter = 0;
+        gaugeLevel++;
+        // Augmenter la capacité de 20% (arrondi)
+        gaugeMax = Math.round(gaugeMax * 1.2);
+        console.log('Jauge pleine ! Niveau ' + gaugeLevel + ' - Capacité: ' + gaugeMax);
+    }
+    updateGauge();
+}
+
 
 
 
@@ -108,6 +139,7 @@ image1.addEventListener('click', () => {
     glucideCounter++;
     compteurElement.textContent = compteur;
     glucideCounterElement.textContent = glucideCounter;
+    incrementGauge();
 });
 
 image2.addEventListener('click', () => {
@@ -116,6 +148,7 @@ image2.addEventListener('click', () => {
     proteineCounter++;
     compteurElement.textContent = compteur;
     proteineCounterElement.textContent = proteineCounter;
+    incrementGauge();
 });
 
 image3.addEventListener('click', () => {
@@ -124,6 +157,7 @@ image3.addEventListener('click', () => {
     lipideCounter++;
     compteurElement.textContent = compteur;
     lipideCounterElement.textContent = lipideCounter;
+    incrementGauge();
 });
 
 // Boutons sauvegarde et chargement
@@ -138,7 +172,10 @@ sauvegardeBtn.addEventListener('click', () => {
         glucideCounter: glucideCounter,
         lipideCounter: lipideCounter,
         autoIncrementBought: autoIncrementBought,
-        zonesUnlocked: zonesUnlocked
+        zonesUnlocked: zonesUnlocked,
+        gaugeLevel: gaugeLevel,
+        gaugeCounter: gaugeCounter,
+        gaugeMax: gaugeMax
     };
     const json = JSON.stringify(data, null, 2);
     const blob = new Blob([json], { type: 'application/json' });
@@ -196,6 +233,14 @@ fileInput.addEventListener('change', (event) => {
                     if (data.zonesUnlocked !== undefined) {
                         zonesUnlocked = data.zonesUnlocked;
                         restoreZonesState();
+                    }
+                    
+                    // Restaurer la jauge de progression
+                    if (data.gaugeLevel !== undefined) {
+                        gaugeLevel = data.gaugeLevel;
+                        gaugeCounter = data.gaugeCounter || 0;
+                        gaugeMax = data.gaugeMax || 100;
+                        updateGauge();
                     }
                     
                     console.log('Sauvegarde chargée avec succès !');
@@ -293,6 +338,100 @@ function startAutoIncrement() {
         compteurElement.textContent = compteur;
     }, 1000); // 1000ms = 1 seconde
 }
+
+// ==================== SAUVEGARDE AUTOMATIQUE ====================
+
+// Fonction pour sauvegarder dans le localStorage
+function saveToLocalStorage() {
+    const saveData = {
+        compteur: compteur,
+        proteineCounter: proteineCounter,
+        glucideCounter: glucideCounter,
+        lipideCounter: lipideCounter,
+        autoIncrementBought: autoIncrementBought,
+        zonesUnlocked: zonesUnlocked,
+        gaugeLevel: gaugeLevel,
+        gaugeCounter: gaugeCounter,
+        gaugeMax: gaugeMax,
+        timestamp: Date.now()
+    };
+    try {
+        localStorage.setItem('jurassicTapSave', JSON.stringify(saveData));
+        console.log('Sauvegarde automatique dans localStorage');
+    } catch (e) {
+        console.error('Erreur lors de la sauvegarde automatique:', e);
+    }
+}
+
+// Fonction pour charger depuis le localStorage
+function loadFromLocalStorage() {
+    try {
+        const savedData = localStorage.getItem('jurassicTapSave');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            if (data.compteur !== undefined) {
+                // Restaurer le compteur principal
+                compteur = data.compteur;
+                compteurElement.textContent = compteur;
+                
+                // Restaurer les compteurs individuels
+                if (data.proteineCounter !== undefined) {
+                    proteineCounter = data.proteineCounter;
+                    proteineCounterElement.textContent = proteineCounter;
+                }
+                if (data.glucideCounter !== undefined) {
+                    glucideCounter = data.glucideCounter;
+                    glucideCounterElement.textContent = glucideCounter;
+                }
+                if (data.lipideCounter !== undefined) {
+                    lipideCounter = data.lipideCounter;
+                    lipideCounterElement.textContent = lipideCounter;
+                }
+                
+                // Restaurer l'amélioration auto-increment
+                if (data.autoIncrementBought !== undefined) {
+                    autoIncrementBought = data.autoIncrementBought;
+                    if (autoIncrementBought) {
+                        document.getElementById('autoIncrementBtn').style.display = 'none';
+                        document.getElementById('autoIncrementStatus').style.display = 'block';
+                        startAutoIncrement();
+                    }
+                }
+                
+                // Restaurer les zones déverrouillées
+                if (data.zonesUnlocked !== undefined) {
+                    zonesUnlocked = data.zonesUnlocked;
+                    restoreZonesState();
+                }
+                
+                // Restaurer la jauge de progression
+                if (data.gaugeLevel !== undefined) {
+                    gaugeLevel = data.gaugeLevel;
+                    gaugeCounter = data.gaugeCounter || 0;
+                    gaugeMax = data.gaugeMax || 100;
+                    updateGauge();
+                }
+                
+                console.log('Sauvegarde automatique chargée depuis localStorage');
+                return true;
+            }
+        }
+    } catch (e) {
+        console.error('Erreur lors du chargement depuis localStorage:', e);
+    }
+    return false;
+}
+
+// Charger la sauvegarde automatique au démarrage
+loadFromLocalStorage();
+
+// Sauvegarder automatiquement toutes les 30 secondes
+setInterval(saveToLocalStorage, 30000);
+
+// Sauvegarder automatiquement quand on quitte la page
+window.addEventListener('beforeunload', saveToLocalStorage);
+
+// ==================== FIN SAUVEGARDE AUTOMATIQUE ====================
 
 
 
