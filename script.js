@@ -14,13 +14,35 @@ console.log('Script chargé');
 // Gestion de la version
 const versionElement = document.getElementById('version');
 let currentVersion = '0.0.0';
+const VERSION_POLL_INTERVAL_MS = 10000;
+const IS_FILE_PROTOCOL = window.location.protocol === 'file:';
+let hasWarnedVersionFileMode = false;
 
 // Fonction pour charger la version depuis le fichier JSON
 async function loadVersion() {
+    if (!versionElement) return;
+
+    // En ouvrant index.html en file://, le navigateur bloque fetch(version.json)
+    if (IS_FILE_PROTOCOL) {
+        if (!hasWarnedVersionFileMode) {
+            console.warn('Mode file:// détecté : chargement de version.json désactivé (CORS navigateur). Lance le jeu via un serveur local (http://) pour activer la version dynamique.');
+            hasWarnedVersionFileMode = true;
+        }
+        versionElement.textContent = 'V.local';
+        return;
+    }
+
     try {
         const response = await fetch('version.json?t=' + Date.now()); // Cache buster
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
         const data = await response.json();
-        const newVersion = data.version;
+        const newVersion = typeof data.version === 'string' ? data.version.trim() : '';
+        if (!newVersion) {
+            throw new Error('Champ "version" manquant ou invalide dans version.json');
+        }
         
         // Mettre à jour si la version a changé
         if (newVersion !== currentVersion) {
@@ -36,8 +58,10 @@ async function loadVersion() {
 // Charger la version au démarrage
 loadVersion();
 
-// Vérifier les mises à jour toutes les 2 secondes
-setInterval(loadVersion, 2000);
+// Vérifier les mises à jour régulièrement
+if (!IS_FILE_PROTOCOL) {
+    setInterval(loadVersion, VERSION_POLL_INTERVAL_MS);
+}
 
 
 // Compteur simple
@@ -372,6 +396,8 @@ setInterval(saveToLocalStorage, 30000);
 window.addEventListener('beforeunload', saveToLocalStorage);
 
 // ==================== FIN SAUVEGARDE AUTOMATIQUE ====================
+
+
 
 
 
