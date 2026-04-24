@@ -39,31 +39,6 @@ loadVersion();
 // Vérifier les mises à jour toutes les 2 secondes
 setInterval(loadVersion, 2000);
 
-// Easter egg : 5 clics sur la version affichent une image pendant 3 secondes
-let versionClickCount = 0;
-let versionClickResetTimer = null;
-const easterEggOverlay = document.getElementById('easterEggOverlay');
-
-function showEasterEgg() {
-    if (!easterEggOverlay) return;
-    easterEggOverlay.classList.add('show');
-    setTimeout(() => {
-        easterEggOverlay.classList.remove('show');
-    }, 3000);
-}
-
-versionElement.addEventListener('click', () => {
-    versionClickCount += 1;
-    clearTimeout(versionClickResetTimer);
-    versionClickResetTimer = setTimeout(() => {
-        versionClickCount = 0;
-    }, 2000);
-
-    if (versionClickCount >= 5) {
-        versionClickCount = 0;
-        showEasterEgg();
-    }
-});
 
 // Compteur simple
 let compteur = 0;
@@ -80,17 +55,6 @@ const lipideCounterElement = document.getElementById('lipide-counter');
 // Variable pour tracker l'amélioration auto-increment
 let autoIncrementBought = false;
 let autoIncrementInterval = null;
-
-// État des zones déverrouillées
-let zonesUnlocked = {
-  zone1: false,
-  zone2: false,
-  zone3: false,
-  zone4: false,
-  zone5: false,
-  zone6: false,
-  zone7: false
-};
 
 // Jauge de progression
 let gaugeLevel = 1;
@@ -163,6 +127,7 @@ image3.addEventListener('click', () => {
 // Boutons sauvegarde et chargement
 const sauvegardeBtn = document.getElementById('sauvegarde');
 const chargementBtn = document.getElementById('chargement');
+const debugResetSaveBtn = document.getElementById('debugResetSave');
 const fileInput = document.getElementById('fileInput');
 
 sauvegardeBtn.addEventListener('click', () => {
@@ -192,6 +157,24 @@ sauvegardeBtn.addEventListener('click', () => {
 chargementBtn.addEventListener('click', () => {
     fileInput.click();
 });
+
+// Fonction globale appelée par le bouton debug (onclick dans le HTML)
+function debugResetLocalSave() {
+    const confirmed = confirm('DEBUG: supprimer la sauvegarde locale et recommencer le jeu depuis le début ?');
+    if (!confirmed) return;
+
+    try {
+        isDebugResetInProgress = true;
+        localStorage.removeItem('jurassicTapSave');
+        console.log('DEBUG: localStorage reset effectué');
+        window.location.reload();
+    } catch (e) {
+        console.error('DEBUG: erreur lors du reset localStorage:', e);
+    }
+}
+
+// Exposer la fonction au scope global pour l'attribut onclick HTML
+window.debugResetLocalSave = debugResetLocalSave;
 
 fileInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
@@ -255,54 +238,6 @@ fileInput.addEventListener('change', (event) => {
     }
 });
 
-// Fonction pour restaurer l'état des zones
-function restoreZonesState() {
-    const zoneElements = {
-        zone1: document.querySelector('.zone1'),
-        zone2: document.querySelector('.zone2'),
-        zone3: document.querySelector('.zone3'),
-        zone4: document.querySelector('.zone4'),
-        zone5: document.querySelector('.zone5'),
-        zone6: document.getElementById('ZoneTraining'),
-        zone7: document.querySelector('.zone7')
-    };
-    
-    for (const [zoneName, isUnlocked] of Object.entries(zonesUnlocked)) {
-        const zoneElement = zoneElements[zoneName];
-        if (zoneElement && isUnlocked) {
-            zoneElement.classList.remove('zone-lock');
-            zoneElement.classList.add('zone');
-            const textSpan = zoneElement.querySelector('.zone-text');
-            if (textSpan) textSpan.style.display = 'none';
-        }
-    }
-}
-
-function showZone6Modal() {
-    const modal = new bootstrap.Modal(document.getElementById('zone6Modal'));
-    modal.show();
-}
-
-function handleZone6Click() {
-    const zone6 = document.getElementById('ZoneTraining');
-    if (zone6.classList.contains('zone-lock')) {
-        if (compteur >= 10) {
-            zone6.classList.remove('zone-lock');
-            zone6.classList.add('zone');
-            const textSpan = zone6.querySelector('.zone-text');
-            if (textSpan) textSpan.style.display = 'none';
-            compteur -= 10;
-            compteurElement.textContent = compteur;
-            zonesUnlocked.zone6 = true;
-            console.log('Zone 6 déverrouillée !');
-        } else {
-            console.log('Pas assez de points pour déverrouiller la zone 6');
-        }
-    } else {
-        // Zone déverrouillée, ouvrir le modal
-        showZone6Modal();
-    }
-}
 
 // Fonction pour acheter l'amélioration auto-increment
 function buyAutoIncrement() {
@@ -341,8 +276,13 @@ function startAutoIncrement() {
 
 // ==================== SAUVEGARDE AUTOMATIQUE ====================
 
+// Empêche une re-sauvegarde juste avant un reset debug
+let isDebugResetInProgress = false;
+
 // Fonction pour sauvegarder dans le localStorage
 function saveToLocalStorage() {
+    if (isDebugResetInProgress) return;
+
     const saveData = {
         compteur: compteur,
         proteineCounter: proteineCounter,
@@ -432,6 +372,9 @@ setInterval(saveToLocalStorage, 30000);
 window.addEventListener('beforeunload', saveToLocalStorage);
 
 // ==================== FIN SAUVEGARDE AUTOMATIQUE ====================
+
+
+
 
 
 
